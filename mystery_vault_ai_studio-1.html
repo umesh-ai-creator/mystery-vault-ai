@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<title>Mystery Vault AI Studio</title>
+<style>
+:root{--bg:#080b16;--panel:#11182a;--line:#27324c;--text:#f3f5ff;--muted:#a9b4cc;--accent:#8b5cf6;--accent2:#22d3ee}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#182142 0,#080b16 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+header{padding:26px 18px 18px;text-align:center} .logo{font-size:12px;letter-spacing:3px;color:var(--accent2);font-weight:800}.orb{width:62px;height:62px;margin:14px auto 10px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed,#0891b2);font-size:30px;box-shadow:0 0 35px #6d28d955}h1{font-size:27px;margin:8px 0}header p{color:var(--muted);margin:0;font-size:14px}
+main{max-width:720px;margin:auto;padding:0 14px 30px}.panel{background:#111827eF;border:1px solid var(--line);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 12px 35px #0002}.panel h2{font-size:17px;margin:0 0 14px}.label{display:block;color:#c8d2e8;font-size:13px;margin:12px 0 6px}select,input,textarea{width:100%;padding:12px;border:1px solid #33415f;border-radius:11px;background:#0a1020;color:var(--text);font:inherit;outline:none}textarea{min-height:94px;resize:vertical}button{border:0;border-radius:11px;padding:12px 14px;font-weight:750;font-size:14px;cursor:pointer;color:white;background:linear-gradient(100deg,#7c3aed,#2563eb)}button.secondary{background:#202b43;border:1px solid #35425e}button:active{transform:scale(.99)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.actions button{flex:1;min-width:125px}.output{white-space:pre-wrap;line-height:1.65;color:#edf1ff;font-size:14px;overflow-wrap:anywhere}.hint{font-size:12px;color:var(--muted);line-height:1.55}.status{font-size:12px;color:#67e8f9;margin-top:9px;min-height:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.footer{text-align:center;color:#7f8ba5;font-size:11px;padding:10px 18px 25px} .pill{display:inline-block;border:1px solid #34415e;border-radius:99px;padding:4px 9px;color:#c4b5fd;font-size:11px;margin:3px}
+@media(max-width:420px){h1{font-size:24px}.panel{padding:14px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">MYSTERY VAULT</div>
+ <div class="orb">👁️</div>
+ <h1>AI Story Studio</h1>
+ <p>Hindi Horror • Mystery • YouTube Shorts</p>
+ <div style="margin-top:10px"><span class="pill">Mobile friendly</span><span class="pill">Free starter</span><span class="pill">Copy-ready</span></div>
+</header>
+<main>
+ <section class="panel">
+  <h2>🎬 अपनी कहानी तैयार करो</h2>
+  <label class="label" for="kind">किस तरह का कंटेंट चाहिए?</label>
+  <select id="kind"><option value="story">हॉरर कहानी</option><option value="prompt">वीडियो बनाने का prompt</option><option value="title">YouTube Shorts title</option><option value="tags">Description और hashtags</option></select>
+  <div class="grid">
+   <div><label class="label" for="setting">जगह</label><select id="setting"><option>सुनसान सड़क</option><option>पुराना अस्पताल</option><option>बंद स्कूल</option><option>जंगल का रास्ता</option><option>पुराना रेलवे स्टेशन</option><option>खाली मकान</option></select></div>
+   <div><label class="label" for="duration">वीडियो की लंबाई</label><select id="duration"><option value="5">5 सेकंड</option><option value="10" selected>10 सेकंड</option><option value="15">15 सेकंड</option><option value="20">20 सेकंड</option></select></div>
+  </div>
+  <label class="label" for="idea">अपना आइडिया (चाहें तो खाली छोड़ें)</label>
+  <textarea id="idea" placeholder="जैसे: रात 12 बजे बाइक के पीछे किसी के चलने की आवाज़..."></textarea>
+  <div class="actions"><button id="make">✨ कंटेंट बनाओ</button><button class="secondary" id="reset">रीसेट</button></div>
+  <div class="status" id="status" role="status"></div>
+ </section>
+ <section class="panel">
+  <h2>📄 तुम्हारा तैयार कंटेंट</h2>
+  <div id="output" class="output">यहाँ तुम्हारा कंटेंट दिखाई देगा। ऊपर विकल्प चुनकर “कंटेंट बनाओ” दबाओ।</div>
+  <div class="actions"><button id="copy" class="secondary">📋 कॉपी करो</button><button id="again" class="secondary">🔄 दूसरा बनाओ</button></div>
+  <p class="hint">ध्यान दें: यह शुरुआती मुफ्त टूल है जो तैयार टेम्पलेट से कंटेंट बनाता है। यह अभी किसी असली AI मॉडल से जुड़ा नहीं है, इसलिए परिणाम हर बार पूरी तरह नए या AI-generated होने की गारंटी नहीं है।</p>
+ </section>
+ <section class="panel">
+  <h2>🚀 आगे क्या जोड़ सकते हैं?</h2>
+  <p class="hint">अगले चरण में असली AI API, अंग्रेज़ी/हिंदी विकल्प, कहानी के लगातार एपिसोड, सेव करने की सुविधा और वेबसाइट पर कमाई के विकल्प जोड़े जा सकते हैं। असली AI API में मुफ्त सीमाएँ हो सकती हैं और API key को सार्वजनिक HTML में नहीं रखना चाहिए।</p>
+ </section>
+</main>
+<div class="footer">MYSTERY VAULT AI STUDIO · Starter project v1.0</div>
+<script>
+const $=id=>document.getElementById(id);
+const endings=[
+"अचानक पीछे से धीमी आवाज़ आई—“तुम अकेले नहीं हो।” कैमरा मुड़ा, लेकिन वहाँ कोई नहीं था।",
+"फोन पर उसी जगह की तस्वीर आई—जिसमें कहानी का किरदार उसके ठीक पीछे खड़ा था।",
+"दरवाज़ा अपने आप बंद हुआ। बाहर से किसी ने फुसफुसाया—“अब मेरी बारी है।”",
+"उसने पीछे देखा तो सड़क खाली थी। मगर गीले पैरों के निशान उसके कमरे तक आ रहे थे।",
+"लाइट जली तो दीवार पर नया संदेश लिखा था—“मैं तुम्हें पहले से जानता हूँ।”"
+];
+let last='';
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function build(){
+ const kind=$('kind').value, place=$('setting').value, sec=$('duration').value, idea=$('idea').value.trim();
+ const base=idea||`रात के सन्नाटे में ${place.toLowerCase()} पर एक अकेला मुसाफ़िर अजीब आवाज़ सुनता है`;
+ const end=pick(endings);
+ let result='';
+ if(kind==='story'){
+ result=`${base}।${sec} सेकंड की छोटी, realistic horror कहानी:\n\nवह रुककर चारों तरफ देखता है। दूर एक परछाईं बिल्कुल स्थिर खड़ी है। जैसे ही वह मोबाइल की टॉर्च जलाता है, परछाईं गायब हो जाती है। तभी उसके कान के पास फुसफुसाहट सुनाई देती है—“${pick(['पीछे मत देखना','मैं कब से तुम्हारा इंतज़ार कर रहा हूँ','तुम यहाँ वापस क्यों आए'])}…”\n\n${end}`;
+ } else if(kind==='prompt'){
+ result=`Create a ${sec}-second realistic cinematic horror mystery video at ${place.toLowerCase()} at midnight. ${base}. Natural handheld camera, believable human movement, dim practical lighting, deep shadows, subtle fog, realistic ambient sound, slow camera push-in, tense silence, no cartoon style, no gore, no on-screen text. End with a sudden unsettling reveal: ${end} Vertical 9:16, detailed realistic footage.`;
+ } else if(kind==='title'){
+ result=pick([`रात ${place} पर जो दिखा, वो इंसान नहीं था…`,`उसने पीछे मुड़कर देखा और फिर…`,`इस सुनसान जगह का राज़ आज तक नहीं खुला`,`आधी रात की सबसे डरावनी आवाज़`,`वह परछाईं हर बार करीब आ रही थी`])+`\n\nविषय: ${base}`;
+ } else {
+ result=`Description:\nएक सुनसान ${place.toLowerCase()} और एक ऐसा रहस्य, जिसका जवाब शायद कोई नहीं जानता। आख़िर तक देखो—अंत तुम्हें सोचने पर मजबूर कर देगा।\n\nHashtags:\n#Horror #Mystery #ScaryStory #HorrorShorts #YouTubeShorts #Paranormal #MysteryVault`;
+ }
+ last=result; $('output').textContent=result; $('status').textContent='तैयार! कॉपी बटन दबाकर इस्तेमाल करो।';
+}
+$('make').addEventListener('click',build);
+$('again').addEventListener('click',build);
+$('reset').addEventListener('click',()=>{$('idea').value='';$('kind').value='story';$('setting').value='सुनसान सड़क';$('duration').value='10';$('output').textContent='यहाँ तुम्हारा कंटेंट दिखाई देगा।';$('status').textContent='रीसेट हो गया।';last='';});
+$('copy').addEventListener('click',async()=>{const text=$('output').textContent;try{await navigator.clipboard.writeText(text);$('status').textContent='कंटेंट कॉपी हो गया!';}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();$('status').textContent='कंटेंट कॉपी करने की कोशिश की गई—अगर न हो तो टेक्स्ट को दबाकर कॉपी करें।';}});
+</script>
+</body>
+</html>
